@@ -2,6 +2,7 @@ package edu.towson.cosc435.labsapp.ui
 
 import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -16,7 +17,9 @@ import edu.towson.cosc435.labsapp.model.Song
 @Composable
 fun SongRow(
     idx: Int,
-    song: Song
+    song: Song,
+    onDelete: (Int) -> Unit,
+    onToggle: (Int) -> Unit
 ) {
     Log.d("TAG", song.name)
     Card(
@@ -28,6 +31,13 @@ fun SongRow(
     ) {
         Row(
             modifier = Modifier
+                .combinedClickable(
+                    onLongClick = {
+                        onDelete(idx)
+                    }
+                ) {
+
+                }
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly
@@ -61,12 +71,12 @@ fun SongRow(
                 modifier = Modifier.weight(1.0f),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Button(onClick= { }, modifier = Modifier.fillMaxWidth()) {
+                Button(onClick= { onDelete(idx) }, modifier = Modifier.fillMaxWidth()) {
                     Text("Delete")
                 }
                 Spacer(modifier = Modifier.padding(bottom=5.dp))
                 Row() {
-                    Checkbox(checked = song.isAwesome, onCheckedChange = { }, modifier = Modifier.padding(end=5.dp))
+                    Checkbox(checked = song.isAwesome, onCheckedChange = { onToggle(idx) }, modifier = Modifier.padding(end=5.dp))
                     Text("Is Awesome")
                 }
             }
