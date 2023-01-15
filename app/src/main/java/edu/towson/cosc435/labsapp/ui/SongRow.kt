@@ -6,7 +6,7 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -19,7 +19,8 @@ fun SongRow(
     idx: Int,
     song: Song,
     onDelete: (Int) -> Unit,
-    onToggle: (Int) -> Unit
+    onToggle: (Int) -> Unit,
+    onSelectSong: (Song) -> Unit
 ) {
     Log.d("TAG", song.name)
     Card(
@@ -36,9 +37,8 @@ fun SongRow(
                         onDelete(idx)
                     }
                 ) {
-
-                }
-                .padding(16.dp),
+                    onSelectSong(song)
+                }.padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {

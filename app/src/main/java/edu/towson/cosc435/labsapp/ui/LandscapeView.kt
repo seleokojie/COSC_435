@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun LandscapeView(content: @Composable () -> Unit) {
+fun LandscapeView(selectedSong: String?, content: @Composable () -> Unit) {
     Row(
     ) {
         Card(
@@ -24,7 +24,9 @@ fun LandscapeView(content: @Composable () -> Unit) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // TODO - 5b. Display the currently selected song here
+                if(selectedSong != null) {
+                    Text(selectedSong)
+                }
             }
         }
         content()
