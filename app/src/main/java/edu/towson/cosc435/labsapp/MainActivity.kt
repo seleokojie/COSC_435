@@ -61,17 +61,23 @@ fun MainScreen() {
 
 @Composable
 fun FormRow(label: String){
+    //In order to make each form row start at the same place
     Row(
         modifier = Modifier
             //.border(2.dp, Color.Green)
             .padding(top = 5.dp, bottom = 5.dp)
             .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly,
+
+        horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
+    //Note, to make the label be closer to the text field, we can use the horizontalArrangement
+    //parameter to change the arrangement of the row
+    //Specifically, we can use the SpaceAround parameter to make the label and text field closer
     ){
         Text(
             text = "$label:",
-
+            modifier = Modifier
+                .width(57.dp)
         )
         //Create an outlined text field with labels as the placeholder
         OutlinedTextField(
@@ -79,8 +85,6 @@ fun FormRow(label: String){
             onValueChange = {},
             placeholder = { Text(label) }
         )
-
-        //OutlinedTextField(value = "", onValueChange = {}, )
     }
 }
 
@@ -89,9 +93,9 @@ fun CheckBoxRow(label: String){
     Row(
         modifier = Modifier
             //.border(2.dp, Color.Green)
-            .padding(top = 5.dp, bottom = 5.dp)
+            .padding(top = 5.dp, bottom = 5.dp, start = 5.dp)
             .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly,
+        horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
     ){
         Text("$label:")
@@ -99,19 +103,23 @@ fun CheckBoxRow(label: String){
     }
 }
 
+
+
 @Composable
 fun FormHeader(){
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(175.dp)
-            .background(Color.LightGray)
+            .background(Color.Blue)
             .padding(32.dp),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.TopCenter
     ){
         Text(
             text = "Add new song",
-            fontSize = 40.sp
+            fontSize = 50.sp,
+            color = Color.White
+
         )
     }
 }
