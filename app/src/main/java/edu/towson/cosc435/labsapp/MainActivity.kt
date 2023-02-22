@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -22,7 +21,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             LabsAppTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
@@ -40,7 +38,6 @@ fun MainScreen() {
         modifier = Modifier.border(1.dp, Color.Red),
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        // TODO - Add the header
         FormHeader()
 
         Spacer(modifier = Modifier.size(16.dp))
@@ -56,30 +53,23 @@ fun MainScreen() {
             Text("Save")
         }
     }
-    // Todo - Pick a Material color theme and apply it (https://material.io/resources)
 }
 
 @Composable
 fun FormRow(label: String){
-    //In order to make each form row start at the same place
     Row(
         modifier = Modifier
-            //.border(2.dp, Color.Green)
-            .padding(top = 5.dp, bottom = 5.dp)
+            .padding(top = 5.dp, bottom = 5.dp, start = 30.dp)
             .fillMaxWidth(),
 
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
-    //Note, to make the label be closer to the text field, we can use the horizontalArrangement
-    //parameter to change the arrangement of the row
-    //Specifically, we can use the SpaceAround parameter to make the label and text field closer
     ){
         Text(
             text = "$label:",
             modifier = Modifier
                 .width(57.dp)
         )
-        //Create an outlined text field with labels as the placeholder
         OutlinedTextField(
             value = "",
             onValueChange = {},
@@ -92,7 +82,6 @@ fun FormRow(label: String){
 fun CheckBoxRow(label: String){
     Row(
         modifier = Modifier
-            //.border(2.dp, Color.Green)
             .padding(top = 5.dp, bottom = 5.dp, start = 5.dp)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.Start,
@@ -102,8 +91,6 @@ fun CheckBoxRow(label: String){
         Checkbox(checked = false, onCheckedChange = {})
     }
 }
-
-
 
 @Composable
 fun FormHeader(){
@@ -119,7 +106,6 @@ fun FormHeader(){
             text = "Add new song",
             fontSize = 50.sp,
             color = Color.White
-
         )
     }
 }
