@@ -6,10 +6,13 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import edu.towson.cosc435.labsapp.ui.nav.Routes
 import edu.towson.cosc435.labsapp.ui.nav.SongsNavGraph
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -44,10 +47,15 @@ private fun BottomBar(
     BottomNavigation(
         elevation = 16.dp
     ) {
+        val backStack by nav.currentBackStackEntryAsState()
+        val destination = backStack?.destination
         BottomNavigationItem(
-            selected = false, // TODO - 10. Set to true if the current route is the SongListRoute
+            selected = destination?.route == Routes.SongList.route,
             onClick = {
-                // TODO - 9. Navigate to the song list route
+                nav.navigate(Routes.SongList.route){
+                    launchSingleTop = true
+                    popUpTo(Routes.SongList.route){ inclusive = false }
+                }
             },
             icon = {
                 Icon(Icons.Default.Home, "")
@@ -57,9 +65,11 @@ private fun BottomBar(
             }
         )
         BottomNavigationItem(
-            selected = false, // TODO - 12. Set to true if the current route is the NewSong route
+            selected = destination?.route == Routes.AddSong.route,
             onClick = {
-                // TODO - 11. Navigate to the new song route
+                nav.navigate(Routes.AddSong.route){
+                    launchSingleTop = true
+                }
             },
             icon = {
                 Icon(Icons.Default.Add, "")

@@ -4,19 +4,20 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.tooling.preview.Preview
 import edu.towson.cosc435.labsapp.model.Song
+import edu.towson.cosc435.labsapp.ui.MainScreen
 import edu.towson.cosc435.labsapp.ui.confirmdialog.ConfirmViewModel
 import edu.towson.cosc435.labsapp.ui.songlist.SongListView
-import edu.towson.cosc435.labsapp.ui.songlist.SongListViewModel
 import edu.towson.cosc435.labsapp.ui.theme.LabsAppTheme
 
 class MainActivity : ComponentActivity() {
 
+    @OptIn(ExperimentalComposeUiApi::class)
     @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,25 +25,7 @@ class MainActivity : ComponentActivity() {
             Log.d("TAG", "onCreate")
             LabsAppTheme {
                 Surface(color = MaterialTheme.colors.background) {
-                    // TODO - 1. Move into SongsNavGraph
-                    // TODO - 2. Call MainScreen()
-                    val vm: SongListViewModel by viewModels()
-                    val confirmViewModel: ConfirmViewModel by viewModels()
-                    val songs by vm.songs
-                    val selectedSong by vm.selectedSong
-                    SongListView(
-                        songs,
-                        selectedSong,
-                        confirmViewModel,
-                        onDelete=vm::deleteSong,
-                        onToggle=vm::toggleAwesome,
-                        onFilter=vm::filter,
-                        onSelectSong=vm::selectSong,
-                        onAddSong={
-                            val song = Song("Song 21", "Artist 2", 1, true)
-                            vm.addSong(song)
-                        }
-                    )
+                    MainScreen()
                 }
             }
         }

@@ -151,6 +151,6 @@ fun NewSongView(
 fun DefaultPreview() {
     LabsAppTheme {
         val vm = NewSongViewModel()
-        NewSongView(vm, {})
+        NewSongView(vm) {}
     }
 }
